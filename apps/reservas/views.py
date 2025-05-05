@@ -9,7 +9,7 @@ from .models import ClienteHistorial
 from django.utils import timezone
 from .models import *
 import traceback
-from django.http import HttpResponseForbidden
+
 
 def cliente_required(view_func):
     def wrapper(request, *args, **kwargs):
