@@ -1,11 +1,10 @@
 from django.contrib import admin
-
-# Register your models here.
+from ..apps.clientes.models import Cliente
+from ..apps.reservas.models import CategoriaMenu, Menu, Mesa, Reserva, Empleado, Pedido, DetallePedido
 from django.contrib import admin
-from .models import CategoriaMenu, Menu, Cliente, Mesa, Reserva, Empleado, Pedido, DetallePedido
 
 
-from .models import ClienteHistorial
+from ..apps.reservas.models import ClienteHistorial
 
 @admin.register(ClienteHistorial)
 class ClienteHistorialAdmin(admin.ModelAdmin):
