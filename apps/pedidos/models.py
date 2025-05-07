@@ -13,6 +13,8 @@ class MenuCategoria(models.Model):
     class Meta:
         managed = False
         db_table = 'menu_categoria'
+    def __str__(self):
+        return self.nombre    
 
 class Menu(models.Model):
     id_menu = models.AutoField(primary_key=True)
