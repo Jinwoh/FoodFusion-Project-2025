@@ -7,7 +7,15 @@ class Empleado(models.Model):
     cedula = models.BigIntegerField()
     correo = models.CharField(max_length=150)
     telefono = models.BigIntegerField(null=True)
-    rol = models.CharField(max_length=20)
+    ROL_CHOICES = [
+        ('seleccionar', 'Seleccionar'),
+        ('gerente', 'Gerente'),
+        ('cajero', 'Cajero'),
+        ('mesero', 'Mesero'),
+        ('cocinero', 'Cocinero'),
+        ('auditor', 'Auditor'),
+        ]
+    rol = models.CharField(max_length=20, choices=ROL_CHOICES, default='Seleccionar')
 
     class Meta:
         managed = False
