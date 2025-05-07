@@ -1,26 +1,15 @@
 from django.db import models
-from django.contrib.auth.models import User
-# Create your models here.
+
 class Cliente(models.Model):
-    #user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    nombre_apellido = models.CharField(max_length=100)
-    cedula = models.CharField(max_length=20, unique=True)
-    correo = models.EmailField(unique=True)
-    telefono = models.CharField(max_length=20)
-    # Esto es un comentario cualquiera.
-    def __str__(self):
-        return f"{self.nombre_apellido} ({self.cedula})"
-    
+    id_clientes = models.AutoField(primary_key=True)  # `SERIAL` en PostgreSQL se mapea a `AutoField` en Django
+    nombre_apellido = models.CharField(max_length=250)  # VARCHAR(250) en PostgreSQL
+    cedula = models.BigIntegerField()  # BIGINT en PostgreSQL
+    telefono = models.BigIntegerField()  # BIGINT en PostgreSQL
+    email = models.EmailField(max_length=150)  # VARCHAR(150) en PostgreSQL, con validación de formato de email
 
-class ClienteHistorial(models.Model):
-    nombre_apellido = models.CharField(max_length=100)
-    cedula = models.CharField(max_length=20)
-    correo = models.EmailField()
-    telefono = models.CharField(max_length=20)
-
-    fecha_registro = models.DateTimeField()
-    fecha_eliminacion = models.DateTimeField(null=True, blank=True)
+    class Meta:
+        managed = False  # No gestionamos la tabla (Django no intentará crearla ni eliminarla)
+        db_table = 'clientes'  # Nombre de la tabla en la base de datos
 
     def __str__(self):
-        return f"{self.nombre_apellido} ({self.correo})"
+        return self.nombre_apellido

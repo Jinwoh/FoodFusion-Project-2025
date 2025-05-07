@@ -1,10 +1,14 @@
 from django.db import models
 
+# Create your models here.
 class Empleado(models.Model):
-    nombre_apellido = models.CharField(max_length=100)
-    cedula = models.CharField(max_length=20, unique=True)
-    celular = models.CharField(max_length=20)
-    correo = models.EmailField(unique=True)
+    id_empleado = models.AutoField(primary_key=True)
+    nombre_apellido = models.CharField(max_length=150)
+    cedula = models.BigIntegerField()
+    correo = models.CharField(max_length=150)
+    telefono = models.BigIntegerField(null=True)
+    rol = models.CharField(max_length=20)
 
-    def __str__(self):
-        return self.nombre_apellido
+    class Meta:
+        managed = False
+        db_table = 'empleado'
