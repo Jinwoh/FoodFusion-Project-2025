@@ -81,7 +81,7 @@ WSGI_APPLICATION = 'restaurante.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': config('DB_ENGINE'),
-        'NAME': config('DB_NAME'),
+        'NAME': 'pruebas',
         'USER': config('DB_USER'),
         'PASSWORD': config('DB_PASSWORD'),
         'HOST': config('DB_HOST'),
