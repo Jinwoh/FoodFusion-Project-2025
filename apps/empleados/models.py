@@ -2,21 +2,13 @@ from django.db import models
 
 # Create your models here.
 class Empleado(models.Model):
-    id_empleado = models.AutoField(primary_key=True)
+    id = models.AutoField(primary_key=True)
     nombre_apellido = models.CharField(max_length=150)
-    cedula = models.BigIntegerField()
+    cedula = models.CharField(max_length=20)
     correo = models.CharField(max_length=150)
-    telefono = models.BigIntegerField(null=True)
-    ROL_CHOICES = [
-        ('seleccionar', 'Seleccionar'),
-        ('gerente', 'Gerente'),
-        ('cajero', 'Cajero'),
-        ('mesero', 'Mesero'),
-        ('cocinero', 'Cocinero'),
-        ('auditor', 'Auditor'),
-        ]
-    rol = models.CharField(max_length=20, choices=ROL_CHOICES, default='Seleccionar')
+    telefono = models.CharField(max_length=20)
+    rol = models.CharField(max_length=20)
 
     class Meta:
+        db_table = 'empleados'
         managed = False
-        db_table = 'empleado'
