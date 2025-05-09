@@ -3,7 +3,7 @@ from .models import Mesa, Reserva
 # Register your models here.
 
 admin.site.register(Mesa)
-admin.site.register(Reserva)
+#admin.site.register(Reserva)
 
 @admin.register(Reserva)
 class ReservaAdmin(admin.ModelAdmin):
