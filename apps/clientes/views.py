@@ -4,8 +4,9 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, logout, login as auth_login
 from django.contrib.auth.decorators import login_required
 from datetime import datetime, timezone
-from .models import ClienteHistorial
 from django.utils import timezone
+
+from apps.empleados.models import ClienteHistorial
 from .models import *
 import traceback
 

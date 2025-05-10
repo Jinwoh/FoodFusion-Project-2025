@@ -6,8 +6,9 @@ class Cliente(models.Model):
     nombre_apellido = models.CharField(max_length=250)
     cedula = models.CharField(max_length=20, unique=True)
     telefono = models.CharField(max_length=20)
-    email = models.CharField(max_length=150, unique=True)
-    fecha_registro = models.DateField(auto_now_add=True)
+    correo = models.CharField(max_length=150, unique=True)
+    fecha_registro = models.DateTimeField(auto_now_add=True)
+    fecha_eliminacion = models.DateTimeField(auto_now_add=True)
 
     class Meta:
         db_table = 'clientes'

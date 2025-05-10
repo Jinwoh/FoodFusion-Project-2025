@@ -27,5 +27,5 @@ class ClienteHistorial(models.Model):
         return f"{self.nombre_apellido} ({self.correo})"
     
     class Meta:
-        db_table = 'empleados'
+        db_table = 'clientes'
         managed = False   

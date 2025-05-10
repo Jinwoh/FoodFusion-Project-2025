@@ -3,8 +3,8 @@ from .models import Cliente
 
 
 class ClienteAdmin(admin.ModelAdmin):
-    list_display = ('nombre_apellido', 'cedula', 'telefono', 'email')
-    search_fields = ('nombre_apellido', 'email')
+    list_display = ('nombre_apellido', 'cedula', 'telefono', 'correo')
+    search_fields = ('nombre_apellido', 'correo')
  
 
 admin.site.register(Cliente, ClienteAdmin)
