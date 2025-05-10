@@ -3,6 +3,8 @@
 from django.urls import path
 from . import views
 
+
+
 urlpatterns = [
-    path('', views.index, name='index'),  # Ajusta según tus vistas
+    path('historial_cliente/<int:cliente_id>/', views.historial_cliente, name='historial_cliente'),
 ]
