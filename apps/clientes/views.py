@@ -39,25 +39,25 @@ def registro(request):
     if request.method == 'POST':
         nombre_apellido = request.POST.get('nombre_apellido')
         cedula = request.POST.get('cedula')
-        email = request.POST.get('email')
+        correo = request.POST.get('correo')
         telefono = request.POST.get('telefono')
         password = request.POST.get('password1')
 
         # Validación básica
-        if not all([nombre_apellido, cedula, email, telefono, password]):
+        if not all([nombre_apellido, cedula, correo, telefono, password]):
             return render(request, 'signup.html', {'error': 'Todos los campos son obligatorios.'})
 
         # Validar si ya existe usuario
-        if user.objects.filter(username=email).exists():
+        if user.objects.filter(username=correo).exists():
             return render(request, 'signup.html', {'error': 'Ya existe un usuario con ese correo.'})
 
         # Validar si ya existe cliente con ese correo o cédula
-        if Cliente.objects.filter(correo=email).exists() or Cliente.objects.filter(cedula=cedula).exists():
+        if Cliente.objects.filter(correo=correo).exists() or Cliente.objects.filter(cedula=cedula).exists():
             return render(request, 'signup.html', {'error': 'Cliente ya registrado con ese correo o cédula.'})
 
         try:
             # Crear usuario
-            user = user.objects.create_user(username=email, email=email, password=password)
+            user = user.objects.create_user(username=correo, email=correo, password=password)
             user.save()
 
             # Crear cliente
@@ -65,7 +65,7 @@ def registro(request):
                 user=user,
                 nombre_apellido=nombre_apellido,
                 cedula=cedula,
-                correo=email,
+                correo=correo,
                 telefono=telefono
             )
             cliente.save()
@@ -91,10 +91,10 @@ def registro(request):
 
 def login(request):
     if request.method == 'POST':
-        email = request.POST.get('email')
+        correo = request.POST.get('correo')
         password = request.POST.get('password')
 
-        user = authenticate(request, username=email, password=password)  # Asegúrate de usar 'username' en lugar de 'correo'
+        user = authenticate(request, username=correo, password=password)  # Asegúrate de usar 'username' en lugar de 'correo'
         if user is not None:
             auth_login(request, user)  # Usa auth_login para iniciar la sesión
             return redirect('home')  # Redirige a la página principal
@@ -107,7 +107,7 @@ def login(request):
 @login_required
 @cliente_required
 def editar_datos(request):
-    cliente = Cliente.objects.get(user=request.user)
+    cliente = Cliente.objects.get(nombre_apellido=request.user)
 
     if request.method == 'POST':
         cliente.nombre_apellido = request.POST.get('nombre_apellido')
