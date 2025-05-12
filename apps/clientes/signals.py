@@ -10,7 +10,7 @@ def crear_historial_al_registrar_cliente(sender, instance, created, **kwargs):
         ClienteHistorial.objects.create(
             nombre_apellido=instance.nombre_apellido,
             cedula=instance.cedula,
-            correo=instance.email,
+            correo=instance.correo,
             telefono=instance.telefono,
             fecha_registro=now()
         )
@@ -18,14 +18,14 @@ def crear_historial_al_registrar_cliente(sender, instance, created, **kwargs):
 @receiver(post_delete, sender=Cliente)
 def guardar_historial_al_eliminar_cliente(sender, instance, **kwargs):
     try:
-        historial = ClienteHistorial.objects.get(correo=instance.email)
+        historial = ClienteHistorial.objects.get(correo=instance.correo)
         historial.fecha_eliminacion = now()
         historial.save()
     except ClienteHistorial.DoesNotExist:
         ClienteHistorial.objects.create(
             nombre_apellido=instance.nombre_apellido,
             cedula=instance.cedula,
-            correo=instance.email,
+            correo=instance.correo,
             telefono=instance.telefono,
             fecha_registro=now(),
             fecha_eliminacion=now()

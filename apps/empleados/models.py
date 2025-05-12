@@ -8,10 +8,23 @@ class Empleado(models.Model):
     correo = models.CharField(max_length=150, unique=True)
     telefono = models.CharField(max_length=20)
     rol = models.CharField(max_length=20)
+    ROL_CHOICES = [
+        ('Seleccionar', 'Seleccionar'),
+        ('Gerente', 'Gerente'),
+        ('Cajero', 'Cajero'),
+        ('Mesero', 'Mesero'),
+        ('Cocinero', 'Cocinero'),
+    ]
+    rol = models.CharField(max_length=20, choices=ROL_CHOICES, default='Seleccionar')
+
+    def __str__(self):
+        return f"{self.nombre_apellido} ({self.rol})"
+
 
     class Meta:
         db_table = 'empleados'
         managed = False
+        
 
 
 class ClienteHistorial(models.Model):
@@ -29,3 +42,5 @@ class ClienteHistorial(models.Model):
     class Meta:
         db_table = 'clientes'
         managed = False   
+
+
